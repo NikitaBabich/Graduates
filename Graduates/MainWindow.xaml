@@ -1,0 +1,39 @@
+﻿<Window x:Class="Graduates.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Graduates"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowStartupLocation="CenterScreen" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="BtnAddData" Content="Добавить запись" Click="BtnAddData_Click"/>
+            <Button x:Name="BtnDeleteData" Content="Удалить запись" Click="BtnDeleteData_Click"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" x:Name="DataGridStorage" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Хранимый обьект" Binding="{Binding Type_storage_object.Name}"/>
+                <DataGridTextColumn Header="Студент" Binding="{Binding Students.Surname}"/>
+                <DataGridTextColumn Header="Преподаватель" Binding="{Binding Teachers.Surname}"/>
+                <DataGridTemplateColumn Header="Редактировать">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnEditData" Click="BtnEditData_Click">Изменить</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="BtnSelectStudent" Content="Открыть список студентов" Click="BtnSelectStudent_Click"/>
+            <Button x:Name="BtnSelectTeacher" Content="Открыть список преподавателей" Click="BtnSelectTeacher_Click"/>
+            <Button x:Name="BtnSelectGGroup" Content="Открыть список групп" Click="BtnSelectGGroup_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,24 @@
+﻿<Window x:Class="Graduates.Windows.ObjectAddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Graduates.Windows"
+        mc:Ignorable="d"
+        Title="ObjectAddWindow" WindowStartupLocation="CenterScreen" Height="250" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <UniformGrid Columns="2">
+            <TextBlock>Обьект</TextBlock>
+            <ComboBox x:Name="CmbObject" DisplayMemberPath="Name" SelectedItem="{Binding Id_object}"></ComboBox>
+            <TextBlock>Студент</TextBlock>
+            <ComboBox x:Name="CmbStudent" DisplayMemberPath="Surname" SelectedItem="{Binding Id_student}"></ComboBox>
+            <TextBlock>Преподаватель</TextBlock>
+            <ComboBox x:Name="CmbTeacher" DisplayMemberPath="Surname" SelectedItem="{Binding Id_teacher}"></ComboBox>
+        </UniformGrid>
+        <Button x:Name="BtnSaveData" Grid.Row="1" Click="BtnSaveData_Click">Добавить</Button>
+    </Grid>
+</Window>

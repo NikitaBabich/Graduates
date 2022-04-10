@@ -1,0 +1,710 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище GraduatesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_name_ed" Type="int" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="int" />
+          <Property Name="Group_photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Name_of_the_educational_institution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_type" Type="int" />
+          <Property Name="Years" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Storage_objects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_storage_object" Type="int" />
+          <Property Name="Id_student" Type="int" />
+          <Property Name="Id_teacher" Type="int" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patromoyc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Stydent_photo" Type="varbinary(max)" />
+          <Property Name="Id_group" Type="int" />
+          <Property Name="Year_of_graduade" Type="int" />
+        </EntityType>
+        <EntityType Name="Student-Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id_student" Type="int" />
+          <Property Name="Id_yeacher" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Post" Type="int" />
+          <Property Name="Teacher_photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type_of_institution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Type_storage_object">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Departments_Name_of_the_educational_institution">
+          <End Role="Name_of_the_educational_institution" Type="Self.Name_of_the_educational_institution" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Name_of_the_educational_institution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="Id_name_ed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Name_of_the_educational_institution_Type_of_institution">
+          <End Role="Type_of_institution" Type="Self.Type_of_institution" Multiplicity="0..1" />
+          <End Role="Name_of_the_educational_institution" Type="Self.Name_of_the_educational_institution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_institution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Name_of_the_educational_institution">
+              <PropertyRef Name="Id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_objects_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Storage_objects" Type="Self.Storage_objects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Storage_objects">
+              <PropertyRef Name="Id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_objects_Teachers">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+          <End Role="Storage_objects" Type="Self.Storage_objects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Storage_objects">
+              <PropertyRef Name="Id_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_objects_Type_storage_object">
+          <End Role="Type_storage_object" Type="Self.Type_storage_object" Multiplicity="0..1" />
+          <End Role="Storage_objects" Type="Self.Storage_objects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_storage_object">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Storage_objects">
+              <PropertyRef Name="Id_storage_object" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Id_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student-Teacher_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Student-Teacher" Type="Self.Student-Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student-Teacher">
+              <PropertyRef Name="Id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student-Teacher_Teachers">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+          <End Role="Student-Teacher" Type="Self.Student-Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student-Teacher">
+              <PropertyRef Name="Id_yeacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers">
+              <PropertyRef Name="Post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище GraduatesModelContainer">
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Name_of_the_educational_institution" EntityType="Self.Name_of_the_educational_institution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storage_objects" EntityType="Self.Storage_objects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student-Teacher" EntityType="Self.Student-Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_of_institution" EntityType="Self.Type_of_institution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_storage_object" EntityType="Self.Type_storage_object" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Departments_Name_of_the_educational_institution" Association="Self.FK_Departments_Name_of_the_educational_institution">
+            <End Role="Name_of_the_educational_institution" EntitySet="Name_of_the_educational_institution" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Departments" Association="Self.FK_Groups_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Name_of_the_educational_institution_Type_of_institution" Association="Self.FK_Name_of_the_educational_institution_Type_of_institution">
+            <End Role="Type_of_institution" EntitySet="Type_of_institution" />
+            <End Role="Name_of_the_educational_institution" EntitySet="Name_of_the_educational_institution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_objects_Students" Association="Self.FK_Storage_objects_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Storage_objects" EntitySet="Storage_objects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_objects_Teachers" Association="Self.FK_Storage_objects_Teachers">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Storage_objects" EntitySet="Storage_objects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_objects_Type_storage_object" Association="Self.FK_Storage_objects_Type_storage_object">
+            <End Role="Type_storage_object" EntitySet="Type_storage_object" />
+            <End Role="Storage_objects" EntitySet="Storage_objects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="Self.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student-Teacher_Students" Association="Self.FK_Student-Teacher_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Student-Teacher" EntitySet="Student-Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student-Teacher_Teachers" Association="Self.FK_Student-Teacher_Teachers">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Student-Teacher" EntitySet="Student-Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Posts" Association="Self.FK_Teachers_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Teachers" EntitySet="Teachers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GraduatesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_name_ed" Type="Int32" />
+          <NavigationProperty Name="Name_of_the_educational_institution" Relationship="Self.FK_Departments_Name_of_the_educational_institution" FromRole="Departments" ToRole="Name_of_the_educational_institution" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_Departments" FromRole="Departments" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="Int32" />
+          <Property Name="Group_photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Department1" Relationship="Self.FK_Groups_Departments" FromRole="Groups" ToRole="Departments" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Name_of_the_educational_institution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_type" Type="Int32" />
+          <Property Name="Years" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Departments_Name_of_the_educational_institution" FromRole="Name_of_the_educational_institution" ToRole="Departments" />
+          <NavigationProperty Name="Type_of_institution" Relationship="Self.FK_Name_of_the_educational_institution_Type_of_institution" FromRole="Name_of_the_educational_institution" ToRole="Type_of_institution" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Teachers" Relationship="Self.FK_Teachers_Posts" FromRole="Posts" ToRole="Teachers" />
+        </EntityType>
+        <EntityType Name="Storage_objects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_storage_object" Type="Int32" />
+          <Property Name="Id_student" Type="Int32" />
+          <Property Name="Id_teacher" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Storage_objects_Students" FromRole="Storage_objects" ToRole="Students" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Storage_objects_Teachers" FromRole="Storage_objects" ToRole="Teachers" />
+          <NavigationProperty Name="Type_storage_object" Relationship="Self.FK_Storage_objects_Type_storage_object" FromRole="Storage_objects" ToRole="Type_storage_object" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patromoyc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Stydent_photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Id_group" Type="Int32" />
+          <Property Name="Year_of_graduade" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="Storage_objects" Relationship="Self.FK_Storage_objects_Students" FromRole="Students" ToRole="Storage_objects" />
+          <NavigationProperty Name="Student_Teacher" Relationship="Self.FK_Student_Teacher_Students" FromRole="Students" ToRole="Student_Teacher" />
+        </EntityType>
+        <EntityType Name="Student_Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_student" Type="Int32" />
+          <Property Name="Id_yeacher" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_Teacher_Students" FromRole="Student_Teacher" ToRole="Students" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Student_Teacher_Teachers" FromRole="Student_Teacher" ToRole="Teachers" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Post" Type="Int32" />
+          <Property Name="Teacher_photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Post1" Relationship="Self.FK_Teachers_Posts" FromRole="Teachers" ToRole="Posts" />
+          <NavigationProperty Name="Storage_objects" Relationship="Self.FK_Storage_objects_Teachers" FromRole="Teachers" ToRole="Storage_objects" />
+          <NavigationProperty Name="Student_Teacher" Relationship="Self.FK_Student_Teacher_Teachers" FromRole="Teachers" ToRole="Student_Teacher" />
+        </EntityType>
+        <EntityType Name="Type_of_institution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Name_of_the_educational_institution" Relationship="Self.FK_Name_of_the_educational_institution_Type_of_institution" FromRole="Type_of_institution" ToRole="Name_of_the_educational_institution" />
+        </EntityType>
+        <EntityType Name="Type_storage_object">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Storage_objects" Relationship="Self.FK_Storage_objects_Type_storage_object" FromRole="Type_storage_object" ToRole="Storage_objects" />
+        </EntityType>
+        <Association Name="FK_Departments_Name_of_the_educational_institution">
+          <End Role="Name_of_the_educational_institution" Type="Self.Name_of_the_educational_institution" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Name_of_the_educational_institution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="Id_name_ed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Departments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Id_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Name_of_the_educational_institution_Type_of_institution">
+          <End Role="Type_of_institution" Type="Self.Type_of_institution" Multiplicity="0..1" />
+          <End Role="Name_of_the_educational_institution" Type="Self.Name_of_the_educational_institution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_institution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Name_of_the_educational_institution">
+              <PropertyRef Name="Id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Posts">
+          <End Role="Posts" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Teachers" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers">
+              <PropertyRef Name="Post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_objects_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Storage_objects" Type="Self.Storage_objects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Storage_objects">
+              <PropertyRef Name="Id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_objects_Teachers">
+          <End Role="Teachers" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Storage_objects" Type="Self.Storage_objects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Storage_objects">
+              <PropertyRef Name="Id_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_objects_Type_storage_object">
+          <End Role="Type_storage_object" Type="Self.Type_storage_object" Multiplicity="0..1" />
+          <End Role="Storage_objects" Type="Self.Storage_objects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_storage_object">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Storage_objects">
+              <PropertyRef Name="Id_storage_object" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Teacher_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student_Teacher" Type="Self.Student_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_Teacher">
+              <PropertyRef Name="Id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Teacher_Teachers">
+          <End Role="Teachers" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Student_Teacher" Type="Self.Student_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_Teacher">
+              <PropertyRef Name="Id_yeacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GraduatesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Name_of_the_educational_institution" EntityType="Self.Name_of_the_educational_institution" />
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <EntitySet Name="Storage_objects" EntityType="Self.Storage_objects" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Student_Teacher" EntityType="Self.Student_Teacher" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <EntitySet Name="Type_of_institution" EntityType="Self.Type_of_institution" />
+          <EntitySet Name="Type_storage_object" EntityType="Self.Type_storage_object" />
+          <AssociationSet Name="FK_Departments_Name_of_the_educational_institution" Association="Self.FK_Departments_Name_of_the_educational_institution">
+            <End Role="Name_of_the_educational_institution" EntitySet="Name_of_the_educational_institution" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Departments" Association="Self.FK_Groups_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="Self.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Name_of_the_educational_institution_Type_of_institution" Association="Self.FK_Name_of_the_educational_institution_Type_of_institution">
+            <End Role="Type_of_institution" EntitySet="Type_of_institution" />
+            <End Role="Name_of_the_educational_institution" EntitySet="Name_of_the_educational_institution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Posts" Association="Self.FK_Teachers_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Teachers" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_objects_Students" Association="Self.FK_Storage_objects_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Storage_objects" EntitySet="Storage_objects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_objects_Teachers" Association="Self.FK_Storage_objects_Teachers">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Storage_objects" EntitySet="Storage_objects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_objects_Type_storage_object" Association="Self.FK_Storage_objects_Type_storage_object">
+            <End Role="Type_storage_object" EntitySet="Type_storage_object" />
+            <End Role="Storage_objects" EntitySet="Storage_objects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Teacher_Students" Association="Self.FK_Student_Teacher_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Student_Teacher" EntitySet="Student_Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Teacher_Teachers" Association="Self.FK_Student_Teacher_Teachers">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Student_Teacher" EntitySet="Student_Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище GraduatesModelContainer" CdmEntityContainer="GraduatesEntities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="GraduatesModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id_name_ed" ColumnName="Id_name_ed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="GraduatesModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Group_photo" ColumnName="Group_photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Name_of_the_educational_institution">
+            <EntityTypeMapping TypeName="GraduatesModel.Name_of_the_educational_institution">
+              <MappingFragment StoreEntitySet="Name_of_the_educational_institution">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_type" ColumnName="Id_type" />
+                <ScalarProperty Name="Years" ColumnName="Years" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="GraduatesModel.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storage_objects">
+            <EntityTypeMapping TypeName="GraduatesModel.Storage_objects">
+              <MappingFragment StoreEntitySet="Storage_objects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_storage_object" ColumnName="Id_storage_object" />
+                <ScalarProperty Name="Id_student" ColumnName="Id_student" />
+                <ScalarProperty Name="Id_teacher" ColumnName="Id_teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="GraduatesModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patromoyc" ColumnName="Patromoyc" />
+                <ScalarProperty Name="Stydent_photo" ColumnName="Stydent_photo" />
+                <ScalarProperty Name="Id_group" ColumnName="Id_group" />
+                <ScalarProperty Name="Year_of_graduade" ColumnName="Year_of_graduade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Teacher">
+            <EntityTypeMapping TypeName="GraduatesModel.Student_Teacher">
+              <MappingFragment StoreEntitySet="Student-Teacher">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_student" ColumnName="Id_student" />
+                <ScalarProperty Name="Id_yeacher" ColumnName="Id_yeacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GraduatesModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="GraduatesModel.Teacher">
+              <MappingFragment StoreEntitySet="Teachers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="Teacher_photo" ColumnName="Teacher_photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_of_institution">
+            <EntityTypeMapping TypeName="GraduatesModel.Type_of_institution">
+              <MappingFragment StoreEntitySet="Type_of_institution">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_storage_object">
+            <EntityTypeMapping TypeName="GraduatesModel.Type_storage_object">
+              <MappingFragment StoreEntitySet="Type_storage_object">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -29,6 +29,7 @@ namespace Graduates.Windows
         private void ShowTable()
         {
             DataGridStudents.ItemsSource = context.Students.ToList();
+            DataGridStudents.ItemsSource = context.Students.Where(x => x.Surname.Contains(TxtSearch.Text)).ToList();
         }
 
         private void BtnAddData_Click(object sender, RoutedEventArgs e)
@@ -64,6 +65,11 @@ namespace Graduates.Windows
             var currentZap = BtnEdit.DataContext as Student;
             var EditWindow = new Windows.StudentAddWindow(context, currentZap);
             EditWindow.ShowDialog();
+        }
+
+        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ShowTable();
         }
     }
 }

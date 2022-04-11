@@ -14,6 +14,8 @@
         <StackPanel Orientation="Horizontal">
             <Button x:Name="BtnAddData" Content="Добавить запись" Click="BtnAddData_Click"/>
             <Button x:Name="BtnDeleteData" Content="Удалить запись" Click="BtnDeleteData_Click"/>
+            <Label Content="Поиск:" Margin="10,10,10,0"/>
+            <TextBox x:Name="TxtSearch" Margin="10" Width="200" TextChanged="TxtSearch_TextChanged"/>
         </StackPanel>
         <DataGrid Grid.Row="1" x:Name="DataGridStudents" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>

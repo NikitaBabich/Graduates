@@ -13,11 +13,11 @@
         </Grid.RowDefinitions>
         <UniformGrid Columns="2">
             <TextBlock>Обьект</TextBlock>
-            <ComboBox x:Name="CmbObject" DisplayMemberPath="Name" SelectedItem="{Binding Id_object}"></ComboBox>
+            <ComboBox x:Name="CmbObject" DisplayMemberPath="Name" SelectedItem="{Binding Type_storage_object}"></ComboBox>
             <TextBlock>Студент</TextBlock>
-            <ComboBox x:Name="CmbStudent" DisplayMemberPath="Surname" SelectedItem="{Binding Id_student}"></ComboBox>
+            <ComboBox x:Name="CmbStudent" DisplayMemberPath="Surname" SelectedItem="{Binding Student}"></ComboBox>
             <TextBlock>Преподаватель</TextBlock>
-            <ComboBox x:Name="CmbTeacher" DisplayMemberPath="Surname" SelectedItem="{Binding Id_teacher}"></ComboBox>
+            <ComboBox x:Name="CmbTeacher" DisplayMemberPath="Surname" SelectedItem="{Binding Teacher}"></ComboBox>
         </UniformGrid>
         <Button x:Name="BtnSaveData" Grid.Row="1" Click="BtnSaveData_Click">Добавить</Button>
     </Grid>

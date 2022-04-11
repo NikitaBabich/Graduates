@@ -25,12 +25,15 @@ namespace Graduates
         {
             InitializeComponent();
             context = new GraduatesEntities1();
+            CmbFDiltr.ItemsSource = context.Type_storage_object.ToList();
             ShowTable();
         }
 
         private void ShowTable()
         {
             DataGridStorage.ItemsSource = context.Storage_objects.ToList();
+            DataGridStorage.ItemsSource = context.Storage_objects.Where(x => x.Type_storage_object.Contains(CmbFDiltr.SelectedItem)).ToList();
+            //DataGridStorage.ItemsSource = context.Teachers.Where(x => x.Surname.Contains(TxtSearch.Text)).ToList();
         }
 
         private void BtnAddData_Click(object sender, RoutedEventArgs e)
@@ -84,6 +87,11 @@ namespace Graduates
         {
             var GroupsList = new Windows.GroupsListWindow();
             GroupsList.ShowDialog();
+        }
+
+        private void CmbFDiltr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowTable();
         }
     }
 }

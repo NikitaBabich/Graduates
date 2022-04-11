@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Graduates.Windows"
         mc:Ignorable="d"
-        Title="Список обучавшихся" Height="450" Width="800">
+        Title="Список обучавшихся" WindowStartupLocation="CenterScreen" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -15,14 +15,14 @@
             <Button x:Name="BtnAddData" Content="Добавить запись" Click="BtnAddData_Click"/>
             <Button x:Name="BtnDeleteData" Content="Удалить запись" Click="BtnDeleteData_Click"/>
         </StackPanel>
-        <DataGrid Grid.Row="1" x:Name="DataGridAccused" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid Grid.Row="1" x:Name="DataGridStudents" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия}"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding Имя}"/>
-                <DataGridTextColumn Header="Отчество" Binding="{Binding Отчество}"/>
-                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Дата_рождения}"/>
-                <DataGridTextColumn Header="Пол" Binding="{Binding Gender.Пол}"/>
-                <DataGridTextColumn Header="Город" Binding="{Binding Город}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
+                <DataGridTextColumn Header="Фотография" Binding="{Binding Student_photo}"/>
+                <DataGridTextColumn Header="Группа" Binding="{Binding Group.Name}"/>
+                <DataGridTextColumn Header="Год выпуска" Binding="{Binding Year_of_graduade}"/>
                 <DataGridTemplateColumn Header="Редактировать">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

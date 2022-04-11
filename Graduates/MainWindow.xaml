@@ -19,8 +19,8 @@
         <DataGrid Grid.Row="1" x:Name="DataGridStorage" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Хранимый обьект" Binding="{Binding Type_storage_object.Name}"/>
-                <DataGridTextColumn Header="Студент" Binding="{Binding Students.Surname}"/>
-                <DataGridTextColumn Header="Преподаватель" Binding="{Binding Teachers.Surname}"/>
+                <DataGridTextColumn Header="Студент" Binding="{Binding Student.Surname}"/>
+                <DataGridTextColumn Header="Преподаватель" Binding="{Binding Teacher.Surname}"/>
                 <DataGridTemplateColumn Header="Редактировать">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

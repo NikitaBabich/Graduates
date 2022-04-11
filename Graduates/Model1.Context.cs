@@ -13,10 +13,10 @@ namespace Graduates
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class GraduatesEntities : DbContext
+    public partial class GraduatesEntities1 : DbContext
     {
-        public GraduatesEntities()
-            : base("name=GraduatesEntities")
+        public GraduatesEntities1()
+            : base("name=GraduatesEntities1")
         {
         }
     
@@ -31,7 +31,6 @@ namespace Graduates
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Storage_objects> Storage_objects { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<Student_Teacher> Student_Teacher { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<Type_of_institution> Type_of_institution { get; set; }

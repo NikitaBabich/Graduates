@@ -19,9 +19,25 @@ namespace Graduates.Windows
     /// </summary>
     public partial class GroupAddWindow : Window
     {
-        public GroupAddWindow()
+        GraduatesEntities1 context;
+        public GroupAddWindow(GraduatesEntities1 context, Group newgroup)
         {
             InitializeComponent();
+            this.context = context;
+            CmbDep.ItemsSource = context.Type_storage_object.ToList();
+            this.DataContext = newgroup;
+        }
+
+        private void BtnSaveData_Click(object sender, RoutedEventArgs e)
+        {
+            context.SaveChanges();
+            MessageBox.Show("Данные добавлены");
+            this.Close();
+        }
+
+        private void BtnImage_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

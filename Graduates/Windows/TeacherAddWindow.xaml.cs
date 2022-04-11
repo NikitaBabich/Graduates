@@ -19,9 +19,21 @@ namespace Graduates.Windows
     /// </summary>
     public partial class TeacherAddWindow : Window
     {
-        public TeacherAddWindow()
+        GraduatesEntities1 context;
+
+        public TeacherAddWindow(GraduatesEntities1 context, Teacher newteacher)
         {
             InitializeComponent();
+            this.context = context;
+            CmbPost.ItemsSource = context.Posts.ToList();
+            this.DataContext = newteacher;
+        }
+
+        private void BtnSaveData_Click(object sender, RoutedEventArgs e)
+        {
+            context.SaveChanges();
+            MessageBox.Show("Данные добавлены");
+            this.Close();
         }
     }
 }

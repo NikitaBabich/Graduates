@@ -19,7 +19,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Department" Type="int" />
+          <Property Name="Id_department" Type="int" />
           <Property Name="Group_photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Name_of_the_educational_institution">
@@ -53,18 +53,10 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Patromoyc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
           <Property Name="Stydent_photo" Type="varbinary(max)" />
           <Property Name="Id_group" Type="int" />
           <Property Name="Year_of_graduade" Type="int" />
-        </EntityType>
-        <EntityType Name="Student-Teacher">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Id_student" Type="int" />
-          <Property Name="Id_yeacher" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -122,7 +114,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Groups">
-              <PropertyRef Name="Department" />
+              <PropertyRef Name="Id_department" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,30 +178,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Student-Teacher_Students">
-          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
-          <End Role="Student-Teacher" Type="Self.Student-Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student-Teacher">
-              <PropertyRef Name="Id_student" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Student-Teacher_Teachers">
-          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
-          <End Role="Student-Teacher" Type="Self.Student-Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teachers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student-Teacher">
-              <PropertyRef Name="Id_yeacher" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Teachers_Posts">
           <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
           <End Role="Teachers" Type="Self.Teachers" Multiplicity="*" />
@@ -229,7 +197,6 @@
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Storage_objects" EntityType="Self.Storage_objects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Student-Teacher" EntityType="Self.Student-Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type_of_institution" EntityType="Self.Type_of_institution" Schema="dbo" store:Type="Tables" />
@@ -262,14 +229,6 @@
             <End Role="Groups" EntitySet="Groups" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK_Student-Teacher_Students" Association="Self.FK_Student-Teacher_Students">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Student-Teacher" EntitySet="Student-Teacher" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student-Teacher_Teachers" Association="Self.FK_Student-Teacher_Teachers">
-            <End Role="Teachers" EntitySet="Teachers" />
-            <End Role="Student-Teacher" EntitySet="Student-Teacher" />
-          </AssociationSet>
           <AssociationSet Name="FK_Teachers_Posts" Association="Self.FK_Teachers_Posts">
             <End Role="Posts" EntitySet="Posts" />
             <End Role="Teachers" EntitySet="Teachers" />
@@ -296,9 +255,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Department" Type="Int32" />
+          <Property Name="Id_department" Type="Int32" />
           <Property Name="Group_photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Department1" Relationship="Self.FK_Groups_Departments" FromRole="Groups" ToRole="Departments" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Groups_Departments" FromRole="Groups" ToRole="Departments" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
         </EntityType>
         <EntityType Name="Name_of_the_educational_institution">
@@ -338,23 +297,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Patromoyc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Stydent_photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Id_group" Type="Int32" />
           <Property Name="Year_of_graduade" Type="Int32" />
           <NavigationProperty Name="Group" Relationship="Self.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
           <NavigationProperty Name="Storage_objects" Relationship="Self.FK_Storage_objects_Students" FromRole="Students" ToRole="Storage_objects" />
-          <NavigationProperty Name="Student_Teacher" Relationship="Self.FK_Student_Teacher_Students" FromRole="Students" ToRole="Student_Teacher" />
-        </EntityType>
-        <EntityType Name="Student_Teacher">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Id_student" Type="Int32" />
-          <Property Name="Id_yeacher" Type="Int32" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_Student_Teacher_Students" FromRole="Student_Teacher" ToRole="Students" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK_Student_Teacher_Teachers" FromRole="Student_Teacher" ToRole="Teachers" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -378,7 +326,6 @@
           <Property Name="Teacher_photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Post1" Relationship="Self.FK_Teachers_Posts" FromRole="Teachers" ToRole="Posts" />
           <NavigationProperty Name="Storage_objects" Relationship="Self.FK_Storage_objects_Teachers" FromRole="Teachers" ToRole="Storage_objects" />
-          <NavigationProperty Name="Student_Teacher" Relationship="Self.FK_Student_Teacher_Teachers" FromRole="Teachers" ToRole="Student_Teacher" />
         </EntityType>
         <EntityType Name="Type_of_institution">
           <Key>
@@ -417,7 +364,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Groups">
-              <PropertyRef Name="Department" />
+              <PropertyRef Name="Id_department" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -493,38 +440,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Student_Teacher_Students">
-          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
-          <End Role="Student_Teacher" Type="Self.Student_Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_Teacher">
-              <PropertyRef Name="Id_student" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Student_Teacher_Teachers">
-          <End Role="Teachers" Type="Self.Teacher" Multiplicity="0..1" />
-          <End Role="Student_Teacher" Type="Self.Student_Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teachers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_Teacher">
-              <PropertyRef Name="Id_yeacher" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="GraduatesEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="GraduatesEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="Name_of_the_educational_institution" EntityType="Self.Name_of_the_educational_institution" />
           <EntitySet Name="Posts" EntityType="Self.Post" />
           <EntitySet Name="Storage_objects" EntityType="Self.Storage_objects" />
           <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="Student_Teacher" EntityType="Self.Student_Teacher" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="Type_of_institution" EntityType="Self.Type_of_institution" />
@@ -561,21 +483,13 @@
             <End Role="Type_storage_object" EntitySet="Type_storage_object" />
             <End Role="Storage_objects" EntitySet="Storage_objects" />
           </AssociationSet>
-          <AssociationSet Name="FK_Student_Teacher_Students" Association="Self.FK_Student_Teacher_Students">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Student_Teacher" EntitySet="Student_Teacher" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_Teacher_Teachers" Association="Self.FK_Student_Teacher_Teachers">
-            <End Role="Teachers" EntitySet="Teachers" />
-            <End Role="Student_Teacher" EntitySet="Student_Teacher" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище GraduatesModelContainer" CdmEntityContainer="GraduatesEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище GraduatesModelContainer" CdmEntityContainer="GraduatesEntities1">
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="GraduatesModel.Department">
               <MappingFragment StoreEntitySet="Departments">
@@ -590,7 +504,7 @@
               <MappingFragment StoreEntitySet="Groups">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Id_department" ColumnName="Id_department" />
                 <ScalarProperty Name="Group_photo" ColumnName="Group_photo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -628,19 +542,10 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Patromoyc" ColumnName="Patromoyc" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
                 <ScalarProperty Name="Stydent_photo" ColumnName="Stydent_photo" />
                 <ScalarProperty Name="Id_group" ColumnName="Id_group" />
                 <ScalarProperty Name="Year_of_graduade" ColumnName="Year_of_graduade" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Student_Teacher">
-            <EntityTypeMapping TypeName="GraduatesModel.Student_Teacher">
-              <MappingFragment StoreEntitySet="Student-Teacher">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Id_student" ColumnName="Id_student" />
-                <ScalarProperty Name="Id_yeacher" ColumnName="Id_yeacher" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

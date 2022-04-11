@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Graduates.Windows"
         mc:Ignorable="d"
-        Title="StudentAddWindow" Height="450" Width="800">
+        Title="Добвление обучавшегося" WindowStartupLocation="CenterScreen" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <UniformGrid Columns="2">
+            <TextBlock>Фамилия</TextBlock>
+            <TextBox x:Name="TxtSurname" Text="{Binding Surname}"></TextBox>
+            <TextBlock>Имя</TextBlock>
+            <TextBox x:Name="TxtName" Text="{Binding Name}"></TextBox>
+            <TextBlock>Отчество</TextBlock>
+            <TextBox x:Name="TxtPatronomyc" Text="{Binding Patronymic}"></TextBox>
+            <TextBlock>Фото студента</TextBlock>
+            <TextBox x:Name="TxtPhoto" Text="{Binding Student_photo}"></TextBox>
+            <TextBlock>Отделение</TextBlock>
+            <ComboBox x:Name="CmbGroup" DisplayMemberPath="Name" SelectedItem="{Binding Id_group}"></ComboBox>
+            <TextBlock>Год выпуска</TextBlock>
+            <TextBox x:Name="TxtYear" Text="{Binding Year_of_graduade}"></TextBox>
+        </UniformGrid>
+        <Button x:Name="BtnSaveData" Grid.Row="1" Click="BtnSaveData_Click">Добавить</Button>
     </Grid>
 </Window>

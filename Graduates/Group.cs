@@ -22,10 +22,10 @@ namespace Graduates
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Department { get; set; }
+        public Nullable<int> Id_department { get; set; }
         public byte[] Group_photo { get; set; }
     
-        public virtual Department Department1 { get; set; }
+        public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
     }

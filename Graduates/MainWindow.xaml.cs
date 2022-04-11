@@ -20,11 +20,11 @@ namespace Graduates
     /// </summary>
     public partial class MainWindow : Window
     {
-        GraduatesEntities context;
+        GraduatesEntities1 context;
         public MainWindow()
         {
             InitializeComponent();
-            context = new GraduatesEntities();
+            context = new GraduatesEntities1();
             ShowTable();
         }
 

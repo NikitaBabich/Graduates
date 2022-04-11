@@ -19,24 +19,51 @@ namespace Graduates.Windows
     /// </summary>
     public partial class GroupsListWindow : Window
     {
+        GraduatesEntities1 context;
         public GroupsListWindow()
         {
             InitializeComponent();
+            context = new GraduatesEntities1();
+            ShowTable();
+        }
+        private void ShowTable()
+        {
+            DataGridGroups.ItemsSource = context.Groups.ToList();
         }
 
         private void BtnAddData_Click(object sender, RoutedEventArgs e)
         {
-
+            var NewZap = new Group();
+            context.Groups.Add(NewZap);
+            var EditWindow = new Windows.GroupAddWindow(context, NewZap);
+            EditWindow.ShowDialog();
+            ShowTable();
         }
 
         private void BtnDeleteData_Click(object sender, RoutedEventArgs e)
         {
-
+            var currentZap = DataGridGroups.SelectedItem as Group;
+            if (currentZap == null)
+            {
+                MessageBox.Show("Выберите строку!");
+                return;
+            }
+            MessageBoxResult messageBoxResult = MessageBox.Show("Вы хотите удалить?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                context.Groups.Remove(currentZap);
+                context.SaveChanges();
+                MessageBox.Show("Данные удалены");
+                ShowTable();
+            }
         }
 
         private void BtnEditData_Click(object sender, RoutedEventArgs e)
         {
-
+            Button BtnEdit = sender as Button;
+            var currentZap = BtnEdit.DataContext as Group;
+            var EditWindow = new Windows.GroupAddWindow(context, currentZap);
+            EditWindow.ShowDialog();
         }
     }
 }

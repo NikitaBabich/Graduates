@@ -18,7 +18,6 @@ namespace Graduates
         public Teacher()
         {
             this.Storage_objects = new HashSet<Storage_objects>();
-            this.Student_Teacher = new HashSet<Student_Teacher>();
         }
     
         public int Id { get; set; }
@@ -31,7 +30,5 @@ namespace Graduates
         public virtual Post Post1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Storage_objects> Storage_objects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student_Teacher> Student_Teacher { get; set; }
     }
 }

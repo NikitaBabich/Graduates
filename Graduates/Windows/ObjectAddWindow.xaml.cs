@@ -19,8 +19,8 @@ namespace Graduates.Windows
     /// </summary>
     public partial class ObjectAddWindow : Window
     {
-        GraduatesEntities context;
-        public ObjectAddWindow(GraduatesEntities context, Object newobject)
+        GraduatesEntities1 context;
+        public ObjectAddWindow(GraduatesEntities1 context, Object newobject)
         {
             InitializeComponent();
             this.context = context;

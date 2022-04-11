@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Graduates.Windows"
         mc:Ignorable="d"
-        Title="ObjectAddWindow" WindowStartupLocation="CenterScreen" Height="250" Width="600">
+        Title="Добавление записи" WindowStartupLocation="CenterScreen" Height="250" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

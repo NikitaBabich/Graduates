@@ -18,13 +18,12 @@ namespace Graduates
         public Student()
         {
             this.Storage_objects = new HashSet<Storage_objects>();
-            this.Student_Teacher = new HashSet<Student_Teacher>();
         }
     
         public int Id { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
-        public string Patromoyc { get; set; }
+        public string Patronymic { get; set; }
         public byte[] Stydent_photo { get; set; }
         public Nullable<int> Id_group { get; set; }
         public Nullable<int> Year_of_graduade { get; set; }
@@ -32,7 +31,5 @@ namespace Graduates
         public virtual Group Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Storage_objects> Storage_objects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student_Teacher> Student_Teacher { get; set; }
     }
 }

@@ -19,24 +19,51 @@ namespace Graduates.Windows
     /// </summary>
     public partial class SudentsListWindow : Window
     {
+        GraduatesEntities1 context;
         public SudentsListWindow()
         {
             InitializeComponent();
+            context = new GraduatesEntities1();
+            ShowTable();
+        }
+        private void ShowTable()
+        {
+            DataGridStudents.ItemsSource = context.Students.ToList();
         }
 
         private void BtnAddData_Click(object sender, RoutedEventArgs e)
         {
-
+            var NewZap = new Student();
+            context.Students.Add(NewZap);
+            var EditWindow = new Windows.StudentAddWindow(context, NewZap);
+            EditWindow.ShowDialog();
+            ShowTable();
         }
 
         private void BtnDeleteData_Click(object sender, RoutedEventArgs e)
         {
-
+            var currentZap = DataGridStudents.SelectedItem as Student;
+            if (currentZap == null)
+            {
+                MessageBox.Show("Выберите строку!");
+                return;
+            }
+            MessageBoxResult messageBoxResult = MessageBox.Show("Вы хотите удалить?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                context.Students.Remove(currentZap);
+                context.SaveChanges();
+                MessageBox.Show("Данные удалены");
+                ShowTable();
+            }
         }
 
         private void BtnEditData_Click(object sender, RoutedEventArgs e)
         {
-
+            Button BtnEdit = sender as Button;
+            var currentZap = BtnEdit.DataContext as Student;
+            var EditWindow = new Windows.StudentAddWindow(context, currentZap);
+            EditWindow.ShowDialog();
         }
     }
 }

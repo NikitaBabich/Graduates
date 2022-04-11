@@ -4,18 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e108b8e2abaf4db1bceb630e6ecaa2bc" Name="Diagram1">
-        <EntityTypeShape EntityType="GraduatesModel.Department" Width="1.5" PointX="1.5" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Group" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Name_of_the_educational_institution" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Post" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Storage_objects" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Student" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Student_Teacher" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.sysdiagram" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Teacher" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Type_of_institution" Width="1.5" PointX="1.5" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GraduatesModel.Type_storage_object" Width="1.5" PointX="3" PointY="20.875" IsExpanded="true" />
+      <Diagram DiagramId="2e04915542e24d81914611fc725db7a3" Name="Diagram1">
+        <EntityTypeShape EntityType="GraduatesModel.Department" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.Group" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.Name_of_the_educational_institution" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.Post" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.Storage_objects" Width="1.5" PointX="12" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.Student" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.Teacher" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.Type_of_institution" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GraduatesModel.Type_storage_object" Width="1.5" PointX="9.75" PointY="9" IsExpanded="true" />
         <AssociationConnector Association="GraduatesModel.FK_Departments_Name_of_the_educational_institution" ManuallyRouted="false" />
         <AssociationConnector Association="GraduatesModel.FK_Groups_Departments" ManuallyRouted="false" />
         <AssociationConnector Association="GraduatesModel.FK_Students_Groups" ManuallyRouted="false" />
@@ -24,8 +23,6 @@
         <AssociationConnector Association="GraduatesModel.FK_Storage_objects_Students" ManuallyRouted="false" />
         <AssociationConnector Association="GraduatesModel.FK_Storage_objects_Teachers" ManuallyRouted="false" />
         <AssociationConnector Association="GraduatesModel.FK_Storage_objects_Type_storage_object" ManuallyRouted="false" />
-        <AssociationConnector Association="GraduatesModel.FK_Student_Teacher_Students" ManuallyRouted="false" />
-        <AssociationConnector Association="GraduatesModel.FK_Student_Teacher_Teachers" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -23,7 +23,13 @@
                 <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
                 <DataGridTextColumn Header="Должность" Binding="{Binding Post1.Name}"/>
-                <DataGridTextColumn Header="Фотография" Binding="{Binding Teacher_photo}"/>
+                <DataGridTemplateColumn Header="Фотография">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Teacher_photo}" Height="70"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Редактировать">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

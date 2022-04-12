@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +35,21 @@ namespace Graduates.Windows
             context.SaveChanges();
             MessageBox.Show("Данные добавлены");
             this.Close();
+        }
+
+        private void BtnImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Image files: *.jpg, *.png| *.jpg;*.png";
+            openFile.ShowDialog();
+            if (openFile.FileName.Length != 0)
+            {
+                string namefile = openFile.FileName;
+                byte[] image = File.ReadAllBytes(namefile);
+                var student = (Student)this.DataContext;
+                student.Stydent_photo = image;
+                Img.Source = new BitmapImage(new Uri(namefile));
+            }
         }
     }
 }

@@ -26,14 +26,27 @@ namespace Graduates
             InitializeComponent();
             context = new GraduatesEntities1();
             CmbFDiltr.ItemsSource = context.Type_storage_object.ToList();
+
+            var alltypes = context.Type_storage_object.ToList();
+            alltypes.Insert(0, new Type_storage_object
+            {
+                Name = "Всё"
+            });
+            CmbFDiltr.ItemsSource = alltypes;
+            CmbFDiltr.SelectedIndex = 0;
+
             ShowTable();
         }
 
         private void ShowTable()
         {
+            var filter = context.Storage_objects.ToList();
+            if(CmbFDiltr.SelectedIndex > 0)
+            {
+                filter = filter.Where(x => x.Id_storage_object == (CmbFDiltr.SelectedValue as Type_storage_object).Id).ToList();
+            }
             DataGridStorage.ItemsSource = context.Storage_objects.ToList();
-            DataGridStorage.ItemsSource = context.Storage_objects.Where(x => x.Type_storage_object.Contains(CmbFDiltr.SelectedItem)).ToList();
-            //DataGridStorage.ItemsSource = context.Teachers.Where(x => x.Surname.Contains(TxtSearch.Text)).ToList();
+            DataGridStorage.ItemsSource = filter.ToList();
         }
 
         private void BtnAddData_Click(object sender, RoutedEventArgs e)

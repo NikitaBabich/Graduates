@@ -16,8 +16,8 @@
             <TextBox x:Name="TxtName" Text="{Binding Name}"></TextBox>
             <TextBlock>Отделение</TextBlock>
             <ComboBox x:Name="CmbDep" DisplayMemberPath="Name" SelectedItem="{Binding Id_department}"></ComboBox>
-            <TextBlock>Фото группы</TextBlock>
-            <TextBox x:Name="TxtPhoto" Text="{Binding Group_photo}"></TextBox>
+            <Button x:Name="BtnImage" Grid.Row="1" Click="BtnImage_Click">Выбрать фото</Button>
+            <Image Source="{Binding Group_photo}" Name="Img"></Image>
         </UniformGrid>
         <Button x:Name="BtnSaveData" Grid.Row="1" Click="BtnSaveData_Click">Добавить</Button>
     </Grid>

@@ -15,7 +15,7 @@
         <StackPanel Orientation="Horizontal">
             <Button x:Name="BtnAddData" Content="Добавить запись" Click="BtnAddData_Click"/>
             <Button x:Name="BtnDeleteData" Content="Удалить запись" Click="BtnDeleteData_Click"/>
-            <Label Content="Фильтрация ро обьектам:" Margin="10,10,10,0"/>
+            <Label Content="Фильтрация по обьектам:" Margin="10,10,10,0"/>
             <ComboBox x:Name="CmbFDiltr" Margin="10" Width="200" DisplayMemberPath="Name" SelectedItem="{Binding Type_storage_object}" SelectionChanged="CmbFDiltr_SelectionChanged"/>
         </StackPanel>
         <DataGrid Grid.Row="1" x:Name="DataGridStorage" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">

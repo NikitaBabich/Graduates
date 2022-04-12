@@ -20,8 +20,14 @@
         <DataGrid Grid.Row="1" x:Name="DataGridGroups" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Отделение" Binding="{Binding Departments.Name}"/>
-                <DataGridTextColumn Header="Фото" Binding="{Binding Group_photo}"/>
+                <DataGridTextColumn Header="Отделение" Binding="{Binding Department.Name}"/>
+                <DataGridTemplateColumn Header="Фото">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Group_photo}" Height="70"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Редактировать">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

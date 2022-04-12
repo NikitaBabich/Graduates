@@ -18,8 +18,8 @@
             <TextBox x:Name="TxtName" Text="{Binding Name}"></TextBox>
             <TextBlock>Отчество</TextBlock>
             <TextBox x:Name="TxtPatronomyc" Text="{Binding Patronymic}"></TextBox>
-            <TextBlock>Фото студента</TextBlock>
-            <TextBox x:Name="TxtPhoto" Text="{Binding Student_photo}"></TextBox>
+            <Button x:Name="BtnImage" Grid.Row="1" Click="BtnImage_Click">Выбрать фото</Button>
+            <Image Source="{Binding Stydent_photo}" Name="Img"></Image>
             <TextBlock>Отделение</TextBlock>
             <ComboBox x:Name="CmbGroup" DisplayMemberPath="Name" SelectedItem="{Binding Id_group}"></ComboBox>
             <TextBlock>Год выпуска</TextBlock>
